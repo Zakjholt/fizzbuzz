@@ -1,15 +1,15 @@
-var body = $("body");
+var content = $(".content");
 
 var fizzBuzz = function(num) {
     for (i = 1; i <= num; i++) {
         if (i % 3 === 0 && i % 5 === 0) {
-            body.append("<p>fizzbuzz</p>");
+            content.append("<p>fizzbuzz</p>");
         } else if (i % 3 === 0) {
-            body.append("<p>fizz</p>");
+            content.append("<p>fizz</p>");
         } else if (i % 5 === 0) {
-            body.append("<p>buzz</p>");
+            content.append("<p>buzz</p>");
         } else {
-            body.append("<p>" + i + "</p>");
+            content.append("<p>" + i + "</p>");
         }
     }
 };
@@ -17,8 +17,19 @@ var fizzBuzz = function(num) {
 
 var userNum;
 $(document).ready(function() {
-    userNum = parseInt(prompt("Choose a number!"));
-    if (userNum % 1 === 0) {
+    $('#number-form').submit(function(e) {
+      e.preventDefault();
+      $(".content").empty();
+      userNum = parseInt($('#number-entry').val());
+      if (userNum % 1 === 0) {
         fizzBuzz(userNum);
-    }
+      } else {
+        content.append("<p>Input must be an integer</p>");
+      }
+      $(this)[0].reset();
+    });
+    // userNum = parseInt(prompt("Choose a number!"));
+    // if (userNum % 1 === 0) {
+        // fizzBuzz(userNum);
+    // }
 });
